@@ -1,5 +1,6 @@
 import { observable, decorate, action, runInAction } from 'mobx';
 import { getSteamIdByCommunityUrl } from './api';
+import { SteamIdException, FetchException } from './api/errors';
 
 class State {
   players = [];
@@ -23,7 +24,13 @@ class State {
       });
     } catch (e) {
       runInAction(() => {
-        this.error = e.message;
+        if (e instanceof SteamIdException) {
+          this.error = 'Error: unable to get steamid. Please, check entered username';
+        } else if (e instanceof FetchException) {
+          this.error = 'Error: network error';
+        } else {
+          this.error = 'UnknownError';
+        }
       });
     } finally {
       runInAction(() => {

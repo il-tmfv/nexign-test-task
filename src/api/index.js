@@ -27,11 +27,10 @@ const getRequest = async url => {
 export const getSteamIdByCommunityUrl = async username => {
   const url = `${BASE_URL}/steamid?username=${username}`;
 
-  const response = await getRequest(url);
+  const { response } = await getRequest(url);
 
   if (response.success === 1) {
     return response.steamid;
   }
-
   throw new SteamIdException(response.message);
 };
