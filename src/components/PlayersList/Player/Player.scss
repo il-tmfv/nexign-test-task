@@ -1,0 +1,42 @@
+.Player {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #ccc;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.42);
+  max-width: 200px;
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.Player__texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.Player__username {
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 128px;
+}
+
+.Player__steamid {
+  font-size: 10px;
+  color: #888;
+}
+
+.Player__delete-btn {
+  height: 32px;
+  width: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  box-shadow: none;
+  border: 1px solid #777;
+  line-height: 32px;
+  padding: 0;
+  vertical-align: middle;
+}

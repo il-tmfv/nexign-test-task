@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import './Player.scss';
 
 export default class Player extends PureComponent {
   static propTypes = {
@@ -17,10 +18,14 @@ export default class Player extends PureComponent {
     const { username, steamid } = this.props;
 
     return (
-      <div>
-        <div>{username}</div>
-        <div>{steamid}</div>
-        <button onClick={this._onDeleteClick}>X</button>
+      <div className="Player">
+        <div className="Player__texts">
+          <div className="Player__username">{username}</div>
+          <div className="Player__steamid">{`id:${steamid}`}</div>
+        </div>
+        <button className="Player__delete-btn" onClick={this._onDeleteClick}>
+          X
+        </button>
       </div>
     );
   }
