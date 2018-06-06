@@ -3,3 +3,39 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+html {
+  background-color: #ddd;
+}
+
+button {
+  background-color: orange;
+  border: none;
+  font-size: 14px;
+  padding: 8px;
+  min-width: 64px;
+  min-height: 36px;
+  border-radius: 2px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.42);
+
+  &:disabled {
+    background-color: #777;
+    color: #ddd;
+    cursor: not-allowed;
+  }
+}
+
+input {
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.42);
+  font-size: 14px;
+  border-radius: 2px;
+  border: none;
+  min-height: 36px;
+  padding: 0 8px;
+
+  &:disabled {
+    background-color: #777;
+    color: #ddd;
+    cursor: not-allowed;
+  }
+}
