@@ -29,12 +29,12 @@ app.get('/common-games', async function(req, res) {
 
   const promisesForAllSteamIds = [];
 
-  for (let id of steamids) {
-    const ownedGamesUrl = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${STEAM_API_KEY}&steamid=${id}&format=json`;
-    promisesForAllSteamIds.push(request(getOptions(ownedGamesUrl)));
-  }
-
   try {
+    for (let id of steamids) {
+      const ownedGamesUrl = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${STEAM_API_KEY}&steamid=${id}&format=json`;
+      promisesForAllSteamIds.push(request(getOptions(ownedGamesUrl)));
+    }
+
     const ownedGamesResponse = await Promise.all(promisesForAllSteamIds);
     ownedGames = ownedGamesResponse.map(x => JSON.parse(x.body).response.games);
   } catch (e) {
@@ -44,7 +44,24 @@ app.get('/common-games', async function(req, res) {
   // append 'appid' because it will be used as the last arg of the intersectionBy func
   const onlyCommonGames = _.intersectionBy.apply(null, [...ownedGames, 'appid']);
 
-  res.send(onlyCommonGames);
+  const promisesForAllGames = [];
+
+  try {
+    for (let game of onlyCommonGames) {
+      const steamSpyUrl = `http://steamspy.com/api.php?request=appdetails&appid=${game.appid}`;
+      promisesForAllGames.push(request(getOptions(steamSpyUrl)));
+    }
+
+    const steamSpyResponses = await Promise.all(promisesForAllGames);
+    response = steamSpyResponses
+      .map(x => JSON.parse(x.body))
+      .filter(x => 'Multiplayer' in x.tags)
+      .map(x => x.name);
+  } catch (e) {
+    res.status(400).send({ message: `Bad '/steamid' @ SteamSpy request: ${e}` });
+  }
+
+  res.send(response);
 });
 
 app.get('/steamid', async function(req, res) {
