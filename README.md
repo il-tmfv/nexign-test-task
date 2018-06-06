@@ -3,7 +3,7 @@
 how to install and start:
 ```
 yarn
-STEAM_API_KEY=XXXXX yarn server
+STEAM_API_KEY=XXXXX yarn start
 ```
 XXXXX - your steam API key
 
