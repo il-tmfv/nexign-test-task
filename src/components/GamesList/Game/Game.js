@@ -12,7 +12,7 @@ export default class Game extends PureComponent {
 
     return (
       <div>
-        <div>{appid}</div>
+        <a href={`steam://rungameid/${appid}`}>{appid}</a>
         <div>{name}</div>
       </div>
     );
