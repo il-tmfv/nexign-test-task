@@ -11,8 +11,8 @@ class App extends Component {
         <AddNewPlayerForm
           disabled={state.loading}
           newPlayerInputValue={state.newPlayerInputValue}
-          onInputChange={state.onFormInputChange}
-          onSubmit={state.addNewPlayer}
+          onInputChange={e => state.onFormInputChange(e)}
+          onSubmit={() => state.tryAddNewPlayer()}
         />
       </div>
     );

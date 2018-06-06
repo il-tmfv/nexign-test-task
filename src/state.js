@@ -1,5 +1,5 @@
-import { observable, decorate, action } from 'mobx';
-import api from './api';
+import { observable, decorate, action, runInAction } from 'mobx';
+import { getSteamIdByCommunityUrl } from './api';
 
 class State {
   players = [];
@@ -11,17 +11,25 @@ class State {
     this.newPlayerInputValue = e.target.value;
   };
 
-  clearFormInput = () => {
-    this.newPlayerInputValue = '';
-  };
-
-  setError = (text = '') => {
-    this.error = text;
-  };
-
-  addNewPlayer = () => {
+  tryAddNewPlayer = async () => {
     this.loading = true;
-    this.clearFormInput();
+
+    try {
+      const steamid = await getSteamIdByCommunityUrl(this.newPlayerInputValue);
+      runInAction(() => {
+        this.players.push({ username: this.newPlayerInputValue, steamid });
+        this.newPlayerInputValue = '';
+        this.error = '';
+      });
+    } catch (e) {
+      runInAction(() => {
+        this.error = e.message;
+      });
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
   };
 }
 
@@ -31,8 +39,6 @@ decorate(State, {
   loading: observable,
   newPlayerInputValue: observable,
   onFormInputChange: action,
-  clearFormInput: action,
-  setError: action,
   addNewPlayer: action,
 });
 

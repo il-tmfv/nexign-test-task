@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 
-export default class AddNewPlayerForm extends Component {
+class AddNewPlayerForm extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onInputChange: PropTypes.func.isRequired,
@@ -42,3 +43,5 @@ export default class AddNewPlayerForm extends Component {
     );
   }
 }
+
+export default observer(AddNewPlayerForm);

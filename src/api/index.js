@@ -24,7 +24,7 @@ const getRequest = async url => {
   return response.json();
 };
 
-export const getSteamIdByCommunityUrl = async (key, username) => {
+export const getSteamIdByCommunityUrl = async username => {
   const url = `${BASE_URL}/steamid?username=${username}`;
 
   const response = await getRequest(url);
