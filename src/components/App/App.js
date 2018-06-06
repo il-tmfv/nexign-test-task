@@ -5,6 +5,7 @@ import './App.scss';
 import AddNewPlayerForm from 'components/AddNewPlayerForm';
 import Error from 'components/Error';
 import PlayersList from 'components/PlayersList';
+import GamesList from 'components/GamesList';
 import state from '../../state';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
           onSubmit={() => state.tryAddNewPlayer()}
         />
         <PlayersList list={toJS(state.players)} />
+        <GamesList onButtonClick={() => state.tryGetGames()} list={toJS(state.games)} />
       </div>
     );
   }

@@ -1,15 +1,46 @@
-import { observable, decorate, action, runInAction } from 'mobx';
-import { getSteamIdByCommunityUrl } from './api';
+import { observable, decorate, action, runInAction, computed } from 'mobx';
+import { getSteamIdByCommunityUrl, getCommonMultiplayerGames } from './api';
 import { SteamIdException, FetchException } from './api/errors';
 
 class State {
   players = [];
+  games = [];
   error = '';
   loading = false;
   newPlayerInputValue = '';
 
   onFormInputChange = e => {
     this.newPlayerInputValue = e.target.value;
+  };
+
+  get steamids() {
+    return this.players.map(x => x.steamid);
+  }
+
+  tryGetGames = async () => {
+    this.loading = true;
+    try {
+      const games = await getCommonMultiplayerGames(this.steamids);
+      console.log(games);
+      runInAction(() => {
+        this.games = games;
+        this.error = '';
+      });
+    } catch (e) {
+      runInAction(() => {
+        if (e instanceof SteamIdException) {
+          this.error = 'Error: unable to get steamid. Please, check entered username';
+        } else if (e instanceof FetchException) {
+          this.error = 'Error: network error';
+        } else {
+          this.error = 'UnknownError';
+        }
+      });
+    } finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
   };
 
   tryAddNewPlayer = async () => {
@@ -42,11 +73,13 @@ class State {
 
 decorate(State, {
   players: observable,
+  games: observable,
   error: observable,
   loading: observable,
   newPlayerInputValue: observable,
   onFormInputChange: action,
   addNewPlayer: action,
+  steamids: computed,
 });
 
 export default new State();

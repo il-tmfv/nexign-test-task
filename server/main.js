@@ -45,7 +45,7 @@ async function filterOnlyMultiplayer(onlyCommonGames) {
   return steamSpyResponses
     .map(x => JSON.parse(x.body))
     .filter(x => 'Multiplayer' in x.tags)
-    .map(x => x.name);
+    .map(x => ({ name: x.name, appid: x.appid }));
 }
 
 app.get('/common-games', async function(req, res) {

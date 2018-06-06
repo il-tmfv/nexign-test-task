@@ -34,3 +34,11 @@ export const getSteamIdByCommunityUrl = async username => {
   }
   throw new SteamIdException(response.message);
 };
+
+export const getCommonMultiplayerGames = async steamids => {
+  const steamidsString = steamids.map(x => `steamids[]=${x}`).join('&');
+
+  const url = `${BASE_URL}/common-games?${steamidsString}`;
+
+  return await getRequest(url);
+};
