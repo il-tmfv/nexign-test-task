@@ -16,13 +16,13 @@ class App extends Component {
         <AddNewPlayerForm
           disabled={state.addNewPlayerDisabled}
           newPlayerInputValue={state.newPlayerInputValue}
-          onInputChange={e => state.onFormInputChange(e)}
-          onSubmit={() => state.tryAddNewPlayer()}
+          onInputChange={state.onFormInputChange}
+          onSubmit={state.tryAddNewPlayer}
         />
         <PlayersList list={toJS(state.players)} />
         <GamesList
           disabled={state.getGamesDisabled}
-          onButtonClick={() => state.tryGetGames()}
+          onButtonClick={state.tryGetGames}
           list={toJS(state.games)}
           empty={state.noGamesFound}
         />
