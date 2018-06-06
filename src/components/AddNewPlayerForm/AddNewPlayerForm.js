@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
 
 class AddNewPlayerForm extends Component {
   static propTypes = {
@@ -37,4 +36,4 @@ class AddNewPlayerForm extends Component {
   }
 }
 
-export default observer(AddNewPlayerForm);
+export default AddNewPlayerForm;
