@@ -66,12 +66,13 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "server": "node ./server/main.js",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "postcommit": "git add ."
   },
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",
-      "eslint",
+      "eslint --fix",
       "git add"
     ],
     "*.{css,scss}": [
