@@ -21,7 +21,6 @@ class AddNewPlayerForm extends Component {
 
     e.preventDefault();
     onSubmit && onSubmit();
-    this.setState({ username: '' });
   };
 
   render() {
