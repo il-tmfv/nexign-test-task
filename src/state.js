@@ -24,7 +24,7 @@ class State {
   }
 
   get getGamesDisabled() {
-    return this.players.length < 2;
+    return this.players.length < 2 || this.loading;
   }
 
   tryGetGames = async () => {
