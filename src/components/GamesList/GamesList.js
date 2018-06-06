@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 
 export default class GamesList extends Component {
   static propTypes = {
+    disabled: PropTypes.bool,
     onButtonClick: PropTypes.func.isRequired,
     list: PropTypes.arrayOf(
       PropTypes.shape({
-        appid: PropTypes.string.isRequired,
+        appid: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
       }),
     ),
@@ -24,11 +25,13 @@ export default class GamesList extends Component {
   };
 
   render() {
-    const { list } = this.props;
+    const { list, disabled } = this.props;
 
     return (
       <div>
-        <button onClick={this._onButtonClick}>Find games</button>
+        <button disabled={disabled} onClick={this._onButtonClick}>
+          Find games
+        </button>
         {list.map(x => <Game key={x.appid} appid={x.appid} name={x.name} />)}
       </div>
     );

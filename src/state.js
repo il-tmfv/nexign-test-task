@@ -17,6 +17,16 @@ class State {
     return this.players.map(x => x.steamid);
   }
 
+  get addNewPlayerDisabled() {
+    return (
+      this.newPlayerInputValue === '' || this.loading || this.players.some(x => x.username === this.newPlayerInputValue)
+    );
+  }
+
+  get getGamesDisabled() {
+    return this.players.length < 2;
+  }
+
   tryGetGames = async () => {
     this.loading = true;
     try {
@@ -80,6 +90,8 @@ decorate(State, {
   onFormInputChange: action,
   addNewPlayer: action,
   steamids: computed,
+  addNewPlayerDisabled: computed,
+  getGamesDisabled: computed,
 });
 
 export default new State();

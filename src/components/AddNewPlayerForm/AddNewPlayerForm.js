@@ -29,13 +29,7 @@ class AddNewPlayerForm extends Component {
 
     return (
       <form onSubmit={this._onSubmit}>
-        <input
-          disabled={disabled}
-          onChange={this._onInputChange}
-          value={newPlayerInputValue}
-          type="text"
-          name="new-player-username"
-        />
+        <input onChange={this._onInputChange} value={newPlayerInputValue} type="text" name="new-player-username" />
         <button disabled={disabled} type="submit">
           Add
         </button>

@@ -14,13 +14,17 @@ class App extends Component {
       <div className="App">
         <Error text={state.error} />
         <AddNewPlayerForm
-          disabled={state.loading}
+          disabled={state.addNewPlayerDisabled}
           newPlayerInputValue={state.newPlayerInputValue}
           onInputChange={e => state.onFormInputChange(e)}
           onSubmit={() => state.tryAddNewPlayer()}
         />
         <PlayersList list={toJS(state.players)} />
-        <GamesList onButtonClick={() => state.tryGetGames()} list={toJS(state.games)} />
+        <GamesList
+          disabled={state.getGamesDisabled}
+          onButtonClick={() => state.tryGetGames()}
+          list={toJS(state.games)}
+        />
       </div>
     );
   }
