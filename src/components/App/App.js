@@ -24,6 +24,7 @@ class App extends Component {
           disabled={state.getGamesDisabled}
           onButtonClick={() => state.tryGetGames()}
           list={toJS(state.games)}
+          empty={state.noGamesFound}
         />
       </div>
     );

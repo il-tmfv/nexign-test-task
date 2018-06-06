@@ -6,6 +6,7 @@ export default class GamesList extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
     onButtonClick: PropTypes.func.isRequired,
+    empty: PropTypes.bool,
     list: PropTypes.arrayOf(
       PropTypes.shape({
         appid: PropTypes.number.isRequired,
@@ -25,14 +26,18 @@ export default class GamesList extends Component {
   };
 
   render() {
-    const { list, disabled } = this.props;
+    const { list, disabled, empty } = this.props;
 
     return (
       <div>
         <button disabled={disabled} onClick={this._onButtonClick}>
           Find games
         </button>
-        {list.map(x => <Game key={x.appid} appid={x.appid} name={x.name} />)}
+        {empty ? (
+          <div>No games found</div>
+        ) : (
+          <div>{list.map(x => <Game key={x.appid} appid={x.appid} name={x.name} />)}</div>
+        )}
       </div>
     );
   }

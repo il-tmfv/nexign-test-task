@@ -5,6 +5,7 @@ import { SteamIdException, FetchException } from './api/errors';
 class State {
   players = [];
   games = [];
+  noGamesFound = false;
   error = '';
   loading = false;
   newPlayerInputValue = '';
@@ -31,9 +32,9 @@ class State {
     this.loading = true;
     try {
       const games = await getCommonMultiplayerGames(this.steamids);
-      console.log(games);
       runInAction(() => {
-        this.games = games;
+        this.games = games || [];
+        this.noGamesFound = this.games.length === 0;
         this.error = '';
       });
     } catch (e) {
@@ -84,6 +85,7 @@ class State {
 decorate(State, {
   players: observable,
   games: observable,
+  noGamesFound: observable,
   error: observable,
   loading: observable,
   newPlayerInputValue: observable,
