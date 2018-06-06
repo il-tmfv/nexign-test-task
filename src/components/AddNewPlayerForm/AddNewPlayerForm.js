@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './AddNewPlayerForm.scss';
 
 class AddNewPlayerForm extends Component {
   static propTypes = {
@@ -26,7 +27,7 @@ class AddNewPlayerForm extends Component {
     const { newPlayerInputValue, disabled } = this.props;
 
     return (
-      <form onSubmit={this._onSubmit}>
+      <form onSubmit={this._onSubmit} className="AddNewPlayerForm">
         <input onChange={this._onInputChange} value={newPlayerInputValue} type="text" name="new-player-username" />
         <button disabled={disabled} type="submit">
           Add
