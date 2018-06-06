@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import './Game.scss';
 
 export default class Game extends PureComponent {
   static propTypes = {
@@ -13,11 +14,15 @@ export default class Game extends PureComponent {
     const { appid, name, userscore, genre } = this.props;
 
     return (
-      <div>
-        <a href={`steam://rungameid/${appid}`}>{appid}</a>
-        <div>{name}</div>
-        <div>{genre}</div>
-        <div>{userscore}</div>
+      <div className="Game">
+        <a className="Game__launch-link" href={`steam://run/${appid}`}>
+          LAUNCH
+        </a>
+        <div className="Game__name">{name}</div>
+        <div className="Game__metadata">
+          <div className="Game__genre">{genre}</div>
+          <div className="Game__userscore">{userscore}</div>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Game from './Game';
 import PropTypes from 'prop-types';
+import './GamesList.scss';
 
 export default class GamesList extends Component {
   static propTypes = {
@@ -31,11 +32,15 @@ export default class GamesList extends Component {
     const { list, disabled, empty } = this.props;
 
     return (
-      <div>
+      <div className="GamesList">
         <button disabled={disabled} onClick={this._onButtonClick}>
           Find games
         </button>
-        {empty ? <div>No games found</div> : <div>{list.map(x => <Game key={x.appid} {...x} />)}</div>}
+        {empty ? (
+          <div>No games found</div>
+        ) : (
+          <div className="GamesList__wrapper">{list.map(x => <Game key={x.appid} {...x} />)}</div>
+        )}
       </div>
     );
   }
