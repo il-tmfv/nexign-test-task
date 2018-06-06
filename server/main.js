@@ -21,44 +21,53 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/common-games', async function(req, res) {
-  const steamids = req.query['steamids'];
-
-  let response = [];
-  let ownedGames;
-
+async function getOwnedGames(steamids) {
   const promisesForAllSteamIds = [];
 
-  try {
-    for (let id of steamids) {
-      const ownedGamesUrl = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${STEAM_API_KEY}&steamid=${id}&format=json`;
-      promisesForAllSteamIds.push(request(getOptions(ownedGamesUrl)));
-    }
+  for (let id of steamids) {
+    const ownedGamesUrl = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${STEAM_API_KEY}&steamid=${id}&format=json`;
+    promisesForAllSteamIds.push(request(getOptions(ownedGamesUrl)));
+  }
 
-    const ownedGamesResponse = await Promise.all(promisesForAllSteamIds);
-    ownedGames = ownedGamesResponse.map(x => JSON.parse(x.body).response.games);
+  const ownedGamesResponse = await Promise.all(promisesForAllSteamIds);
+  return ownedGamesResponse.map(x => JSON.parse(x.body).response.games);
+}
+
+async function filterOnlyMultiplayer(onlyCommonGames) {
+  const promisesForAllGames = [];
+
+  for (let game of onlyCommonGames) {
+    const steamSpyUrl = `http://steamspy.com/api.php?request=appdetails&appid=${game.appid}`;
+    promisesForAllGames.push(request(getOptions(steamSpyUrl)));
+  }
+
+  const steamSpyResponses = await Promise.all(promisesForAllGames);
+  return steamSpyResponses
+    .map(x => JSON.parse(x.body))
+    .filter(x => 'Multiplayer' in x.tags)
+    .map(x => x.name);
+}
+
+app.get('/common-games', async function(req, res) {
+  const steamids = req.query['steamids'];
+  let ownedGames;
+  let response;
+
+  try {
+    ownedGames = await getOwnedGames(steamids);
   } catch (e) {
     res.status(400).send({ message: `Bad '/steamid' @ GetOwnedGames request: ${e}` });
+    return;
   }
 
   // append 'appid' because it will be used as the last arg of the intersectionBy func
   const onlyCommonGames = _.intersectionBy.apply(null, [...ownedGames, 'appid']);
 
-  const promisesForAllGames = [];
-
   try {
-    for (let game of onlyCommonGames) {
-      const steamSpyUrl = `http://steamspy.com/api.php?request=appdetails&appid=${game.appid}`;
-      promisesForAllGames.push(request(getOptions(steamSpyUrl)));
-    }
-
-    const steamSpyResponses = await Promise.all(promisesForAllGames);
-    response = steamSpyResponses
-      .map(x => JSON.parse(x.body))
-      .filter(x => 'Multiplayer' in x.tags)
-      .map(x => x.name);
+    response = await filterOnlyMultiplayer(onlyCommonGames);
   } catch (e) {
     res.status(400).send({ message: `Bad '/steamid' @ SteamSpy request: ${e}` });
+    return;
   }
 
   res.send(response);
