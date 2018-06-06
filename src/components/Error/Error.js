@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import './Error.scss';
 
 export default class Error extends PureComponent {
   static propTypes = {
@@ -13,6 +14,6 @@ export default class Error extends PureComponent {
   render() {
     const { text } = this.props;
 
-    return text ? <div>{text}</div> : null;
+    return text ? <div className="Error">{text}</div> : null;
   }
 }
