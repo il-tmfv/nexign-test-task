@@ -5,6 +5,12 @@ export default class Player extends PureComponent {
   static propTypes = {
     username: PropTypes.string.isRequired,
     steamid: PropTypes.string.isRequired,
+    onDeleteClick: PropTypes.func.isRequired,
+  };
+
+  _onDeleteClick = () => {
+    const { onDeleteClick, steamid } = this.props;
+    onDeleteClick && onDeleteClick(steamid);
   };
 
   render() {
@@ -14,6 +20,7 @@ export default class Player extends PureComponent {
       <div>
         <div>{username}</div>
         <div>{steamid}</div>
+        <button onClick={this._onDeleteClick}>X</button>
       </div>
     );
   }

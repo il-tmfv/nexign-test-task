@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 export default class PlayersList extends Component {
   static propTypes = {
+    onDeleteClick: PropTypes.func.isRequired,
     list: PropTypes.arrayOf(
       PropTypes.shape({
         username: PropTypes.string.isRequired,
@@ -17,8 +18,14 @@ export default class PlayersList extends Component {
   };
 
   render() {
-    const { list } = this.props;
+    const { list, onDeleteClick } = this.props;
 
-    return <div>{list.map(x => <Player key={x.steamid} steamid={x.steamid} username={x.username} />)}</div>;
+    return (
+      <div>
+        {list.map(x => (
+          <Player onDeleteClick={onDeleteClick} key={x.steamid} steamid={x.steamid} username={x.username} />
+        ))}
+      </div>
+    );
   }
 }

@@ -19,7 +19,7 @@ class App extends Component {
           onInputChange={state.onFormInputChange}
           onSubmit={state.tryAddNewPlayer}
         />
-        <PlayersList list={toJS(state.players)} />
+        <PlayersList list={toJS(state.players)} onDeleteClick={state.deletePlayer} />
         <GamesList
           disabled={state.getGamesDisabled}
           onButtonClick={state.tryGetGames}

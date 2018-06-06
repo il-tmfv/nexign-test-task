@@ -28,6 +28,10 @@ class State {
     return this.players.length < 2 || this.loading;
   }
 
+  deletePlayer = steamid => {
+    this.players = this.players.filter(x => x.steamid !== steamid);
+  };
+
   tryGetGames = async () => {
     this.loading = true;
     try {
@@ -90,7 +94,10 @@ decorate(State, {
   loading: observable,
   newPlayerInputValue: observable,
   onFormInputChange: action,
-  addNewPlayer: action,
+  deletePlayer: action,
+  deleteGame: action,
+  tryAddNewPlayer: action,
+  tryGetGames: action,
   steamids: computed,
   addNewPlayerDisabled: computed,
   getGamesDisabled: computed,
