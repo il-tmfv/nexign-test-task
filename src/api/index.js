@@ -1,5 +1,7 @@
 import { SteamIdException, FetchException } from './errors';
 
+const BASE_URL = 'http://localhost:3333';
+
 const headers = new Headers({
   Accept: 'application/json',
 });
@@ -10,7 +12,6 @@ const getRequest = async url => {
   try {
     response = await fetch(url, {
       headers,
-      mode: 'cors',
     });
   } catch (e) {
     throw new FetchException(e.message);
@@ -23,8 +24,8 @@ const getRequest = async url => {
   return response.json();
 };
 
-export const getSteamIdByCommunityUrl = async (key, userVanityUrlName) => {
-  const url = `http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${key}&vanityurl=${userVanityUrlName}`;
+export const getSteamIdByCommunityUrl = async (key, username) => {
+  const url = `${BASE_URL}/steamid?username=${username}`;
 
   const response = await getRequest(url);
 
