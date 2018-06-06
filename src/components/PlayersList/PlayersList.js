@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Player from './Player';
 import PropTypes from 'prop-types';
+import './PlayersList.scss';
 
 export default class PlayersList extends Component {
   static propTypes = {
@@ -21,7 +22,7 @@ export default class PlayersList extends Component {
     const { list, onDeleteClick } = this.props;
 
     return (
-      <div>
+      <div className="PlayersList">
         {list.map(x => (
           <Player onDeleteClick={onDeleteClick} key={x.steamid} steamid={x.steamid} username={x.username} />
         ))}

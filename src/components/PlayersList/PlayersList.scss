@@ -1,0 +1,15 @@
+.PlayersList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 8px;
+
+  & > * {
+    margin-right: 8px;
+    margin-top: 8px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
