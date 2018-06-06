@@ -11,6 +11,8 @@ export default class GamesList extends Component {
       PropTypes.shape({
         appid: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
+        userscore: PropTypes.number.isRequired,
+        genre: PropTypes.string.isRequired,
       }),
     ),
   };
@@ -33,11 +35,7 @@ export default class GamesList extends Component {
         <button disabled={disabled} onClick={this._onButtonClick}>
           Find games
         </button>
-        {empty ? (
-          <div>No games found</div>
-        ) : (
-          <div>{list.map(x => <Game key={x.appid} appid={x.appid} name={x.name} />)}</div>
-        )}
+        {empty ? <div>No games found</div> : <div>{list.map(x => <Game key={x.appid} {...x} />)}</div>}
       </div>
     );
   }
