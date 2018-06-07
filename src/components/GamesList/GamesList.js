@@ -5,8 +5,6 @@ import './GamesList.scss';
 
 export default class GamesList extends Component {
   static propTypes = {
-    disabled: PropTypes.bool,
-    onButtonClick: PropTypes.func.isRequired,
     empty: PropTypes.bool,
     list: PropTypes.arrayOf(
       PropTypes.shape({
@@ -22,20 +20,11 @@ export default class GamesList extends Component {
     list: [],
   };
 
-  _onButtonClick = () => {
-    const { onButtonClick } = this.props;
-
-    onButtonClick && onButtonClick();
-  };
-
   render() {
-    const { list, disabled, empty } = this.props;
+    const { list, empty } = this.props;
 
     return (
       <div className="GamesList">
-        <button className="GamesList__button" disabled={disabled} onClick={this._onButtonClick}>
-          Find games
-        </button>
         {empty ? (
           <div>No games found</div>
         ) : (

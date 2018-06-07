@@ -1,12 +1,11 @@
 .PlayersList {
   display: flex;
-  //justify-content: center;
   flex-wrap: wrap;
-  padding: 8px;
+  padding: 16px;
 
   & > * {
-    margin-right: 8px;
-    margin-left: 8px;
+    margin-right: 4px;
+    margin-left: 4px;
     margin-top: 8px;
   }
 }

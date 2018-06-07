@@ -1,7 +1,11 @@
 .AddNewPlayerForm {
   margin: 8px 16px;
 
-  & > input {
+  & > * {
     margin-right: 8px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }

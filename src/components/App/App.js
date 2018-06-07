@@ -6,6 +6,7 @@ import AddNewPlayerForm from 'components/AddNewPlayerForm';
 import Error from 'components/Error';
 import PlayersList from 'components/PlayersList';
 import GamesList from 'components/GamesList';
+import Loading from 'components/Loading';
 import state from '../../state';
 
 class App extends Component {
@@ -14,18 +15,17 @@ class App extends Component {
       <div className="App">
         <Error text={state.error} />
         <AddNewPlayerForm
-          disabled={state.addNewPlayerDisabled}
+          disabledSubmit={state.addNewPlayerDisabled}
+          disabledInput={state.loading}
           newPlayerInputValue={state.newPlayerInputValue}
           onInputChange={state.onFormInputChange}
           onSubmit={state.tryAddNewPlayer}
+          onFindGamesClick={state.tryGetGames}
+          disabledFindGames={state.getGamesDisabled}
         />
         <PlayersList list={toJS(state.players)} onDeleteClick={state.deletePlayer} />
-        <GamesList
-          disabled={state.getGamesDisabled}
-          onButtonClick={state.tryGetGames}
-          list={toJS(state.games)}
-          empty={state.noGamesFound}
-        />
+        <GamesList list={toJS(state.games)} empty={state.noGamesFound} />
+        <Loading show={state.loading} />
       </div>
     );
   }
