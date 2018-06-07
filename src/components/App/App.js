@@ -22,10 +22,10 @@ class App extends Component {
           onSubmit={state.tryAddNewPlayer}
           onFindGamesClick={state.tryGetGames}
           disabledFindGames={state.getGamesDisabled}
+          loading={state.loading && <Loading />}
         />
         <PlayersList list={toJS(state.players)} onDeleteClick={state.deletePlayer} />
         <GamesList list={toJS(state.games)} empty={state.noGamesFound} />
-        <Loading show={state.loading} />
       </div>
     );
   }

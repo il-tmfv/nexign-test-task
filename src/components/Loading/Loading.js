@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './Loading.scss';
 
 export default class Loading extends Component {
-  static propTypes = {
-    show: PropTypes.bool,
+  state = { ending: '' };
+
+  _intervalRef = null;
+
+  _updateEnding = () => {
+    const { ending } = this.state;
+
+    if (ending.length >= 3) {
+      this.setState({ ending: '' });
+    } else {
+      this.setState(prevState => ({ ending: prevState.ending + '.' }));
+    }
   };
 
-  static defaultProps = {};
+  componentDidMount() {
+    this._intervalRef = setInterval(this._updateEnding, 500);
+  }
+
+  componentWillUnmount() {
+    if (this._intervalRef) {
+      clearInterval(this._intervalRef);
+      this._intervalRef = null;
+    }
+  }
 
   render() {
-    const { show } = this.props;
-
-    return show ? <div className="Loading">Loading</div> : null;
+    return <div className="Loading">{`Loading${this.state.ending}`}</div>;
   }
 }

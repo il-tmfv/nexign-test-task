@@ -11,6 +11,7 @@ class AddNewPlayerForm extends Component {
     disabledSubmit: PropTypes.bool,
     disabledInput: PropTypes.bool,
     disabledFindGames: PropTypes.bool,
+    loading: PropTypes.node.isRequired,
   };
 
   _onInputChange = e => {
@@ -32,7 +33,7 @@ class AddNewPlayerForm extends Component {
   };
 
   render() {
-    const { newPlayerInputValue, disabledSubmit, disabledInput, disabledFindGames } = this.props;
+    const { newPlayerInputValue, disabledSubmit, disabledInput, disabledFindGames, loading } = this.props;
 
     return (
       <form onSubmit={this._onSubmit} className="AddNewPlayerForm">
@@ -49,6 +50,7 @@ class AddNewPlayerForm extends Component {
         <button disabled={disabledFindGames} type="button" onClick={this._onFindGamesClick}>
           Find games
         </button>
+        {loading}
       </form>
     );
   }
