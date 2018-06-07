@@ -26,7 +26,7 @@ export default class GamesList extends Component {
     return (
       <div className="GamesList">
         {empty ? (
-          <div>No games found</div>
+          <div className="GamesList__empty-indicator">No games found :(</div>
         ) : (
           <div className="GamesList__wrapper">{list.map(x => <Game key={x.appid} {...x} />)}</div>
         )}

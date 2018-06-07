@@ -2,6 +2,12 @@
   padding: 16px;
 }
 
+.GamesList__empty-indicator {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .GamesList__wrapper {
   display: flex;
   flex-wrap: wrap;
