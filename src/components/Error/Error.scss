@@ -1,7 +1,9 @@
+@import 'mixins';
+
 .Error {
   margin: 8px 8px 0 8px;
   padding: 8px;
   border-radius: 2px;
   background-color: #ff8780;
-  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.42);
+  @include with-shadow();
 }

@@ -1,5 +1,3 @@
-
-
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
@@ -188,6 +186,7 @@ module.exports = {
                 loader: require.resolve('sass-loader'),
                 options: {
                   sourceMap: true,
+                  includePaths: ['src'],
                 },
               },
             ],

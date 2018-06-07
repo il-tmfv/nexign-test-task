@@ -1,9 +1,11 @@
+@import 'mixins';
+
 .Player {
   display: flex;
   justify-content: space-between;
   padding: 16px;
   background-color: #c2c2c2;
-  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.42);
+  @include with-shadow();
   min-width: 200px;
   max-width: 200px;
   flex-grow: 1;
@@ -24,9 +26,7 @@
 
 .Player__username {
   margin-bottom: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include with-ellipsis();
   max-width: 128px;
 }
 
@@ -41,7 +41,7 @@
   min-width: 32px;
   min-height: 32px;
   box-shadow: none;
-  border: 1px solid #777;
+  @include with-border();
   line-height: 32px;
   padding: 0;
   vertical-align: middle;
