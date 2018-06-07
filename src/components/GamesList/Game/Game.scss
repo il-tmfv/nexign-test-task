@@ -8,6 +8,11 @@
   min-width: 300px;
   min-height: 70px;
   flex-grow: 1;
+  transition: all 250ms;
+
+  &:hover {
+    background-color: #d8d8d8;
+  }
 }
 
 .Game__launch-link {

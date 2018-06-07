@@ -8,6 +8,11 @@
   max-width: 200px;
   flex-grow: 1;
   box-sizing: border-box;
+  transition: all 250ms;
+
+  &:hover {
+    background-color: #d8d8d8;
+  }
 }
 
 .Player__texts {
