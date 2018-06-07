@@ -11,3 +11,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin with-transition() {
+  transition: all 250ms;
+}

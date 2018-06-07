@@ -1,19 +1,21 @@
-@import 'mixins';
+@import 'mixins.scss';
+@import 'colors.scss';
 
 .Player {
   display: flex;
   justify-content: space-between;
   padding: 16px;
-  background-color: #c2c2c2;
+  background-color: $tile-back-color;
   @include with-shadow();
   min-width: 200px;
   max-width: 200px;
   flex-grow: 1;
   box-sizing: border-box;
-  transition: all 250ms;
+  @include with-transition();
+  border-radius: 2px;
 
   &:hover {
-    background-color: #d8d8d8;
+    background-color: $tile-back-hover-color;
   }
 }
 
@@ -28,11 +30,12 @@
   margin-bottom: 4px;
   @include with-ellipsis();
   max-width: 128px;
+  font-weight: 700;
 }
 
 .Player__steamid {
   font-size: 10px;
-  color: #888;
+  color: $tile-secondary-text-color;
 }
 
 .Player__delete-btn {
@@ -41,6 +44,7 @@
   min-width: 32px;
   min-height: 32px;
   box-shadow: none;
+  background-color: $orange-color;
   @include with-border();
   line-height: 32px;
   padding: 0;
