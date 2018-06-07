@@ -5,7 +5,7 @@
   padding: 8px;
   background-color: #c2c2c2;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.42);
-  min-width: 300px;
+  min-width: 200px;
   min-height: 70px;
   flex-grow: 1;
   transition: all 250ms;
@@ -35,11 +35,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 70%;
+  max-width: calc(100% - 64px);
 }
 
 .Game__name {
   font-weight: 700;
+  max-width: calc(100% - 64px);
 }
 
 .Game__userscore {
