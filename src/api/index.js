@@ -1,6 +1,6 @@
 import { SteamIdException, FetchException } from './errors';
 
-const BASE_URL = 'http://localhost:3333';
+const BASE_URL = 'http://192.168.0.3:3333';
 
 const headers = new Headers({
   Accept: 'application/json',
