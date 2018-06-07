@@ -23,9 +23,7 @@ export default class PlayersList extends Component {
 
     return (
       <div className="PlayersList">
-        {list.map(x => (
-          <Player onDeleteClick={onDeleteClick} key={x.steamid} steamid={x.steamid} username={x.username} />
-        ))}
+        {list.map(x => <Player onDeleteClick={onDeleteClick} key={x.steamid} {...x} />)}
       </div>
     );
   }
