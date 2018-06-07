@@ -33,7 +33,7 @@ export default class GamesList extends Component {
 
     return (
       <div className="GamesList">
-        <button disabled={disabled} onClick={this._onButtonClick}>
+        <button className="GamesList__button" disabled={disabled} onClick={this._onButtonClick}>
           Find games
         </button>
         {empty ? (

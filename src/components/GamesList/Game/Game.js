@@ -15,11 +15,13 @@ export default class Game extends PureComponent {
 
     return (
       <div className="Game">
-        <a className="Game__launch-link" href={`steam://run/${appid}`}>
-          LAUNCH
-        </a>
-        <div className="Game__name">{name}</div>
-        <div className="Game__metadata">
+        <div className="Game__data-row">
+          <div className="Game__name">{name}</div>
+          <a className="Game__launch-link" href={`steam://run/${appid}`}>
+            Go!
+          </a>
+        </div>
+        <div className="Game__data-row">
           <div className="Game__genre">{genre}</div>
           <div className="Game__userscore">{userscore}</div>
         </div>
