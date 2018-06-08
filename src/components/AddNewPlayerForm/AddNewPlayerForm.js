@@ -12,6 +12,7 @@ class AddNewPlayerForm extends Component {
     disabledInput: PropTypes.bool,
     disabledFindGames: PropTypes.bool,
     loading: PropTypes.node.isRequired,
+    onInputRefReady: PropTypes.func.isRequired,
   };
 
   _onInputChange = e => {
@@ -22,6 +23,7 @@ class AddNewPlayerForm extends Component {
 
   _onFindGamesClick = () => {
     const { onFindGamesClick } = this.props;
+
     onFindGamesClick && onFindGamesClick();
   };
 
@@ -33,16 +35,25 @@ class AddNewPlayerForm extends Component {
   };
 
   render() {
-    const { newPlayerInputValue, disabledSubmit, disabledInput, disabledFindGames, loading } = this.props;
+    const {
+      newPlayerInputValue,
+      disabledSubmit,
+      disabledInput,
+      disabledFindGames,
+      loading,
+      onInputRefReady,
+    } = this.props;
 
     return (
       <form onSubmit={this._onSubmit} className="AddNewPlayerForm">
         <input
+          ref={onInputRefReady}
           disabled={disabledInput}
           onChange={this._onInputChange}
           value={newPlayerInputValue}
           type="text"
           name="new-player-username"
+          autoFocus
         />
         <button disabled={disabledSubmit} type="submit">
           Add

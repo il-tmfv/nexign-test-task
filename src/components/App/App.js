@@ -23,6 +23,7 @@ class App extends Component {
           onFindGamesClick={state.tryGetGames}
           disabledFindGames={state.getGamesDisabled}
           loading={state.loading && <Loading />}
+          onInputRefReady={state.setInputRef}
         />
         <PlayersList list={toJS(state.players)} onDeleteClick={state.deletePlayer} />
         <GamesList list={toJS(state.games)} empty={state.noGamesFound} />

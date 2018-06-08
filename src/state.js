@@ -3,6 +3,7 @@ import { getSteamIdByCommunityUrl, getCommonMultiplayerGames } from './api';
 import { SteamIdException, FetchException } from './api/errors';
 
 class State {
+  _inputRef = null;
   players = [];
   games = [];
   noGamesFound = false;
@@ -67,6 +68,7 @@ class State {
         this.players.push({ username: this.newPlayerInputValue, steamid });
         this.newPlayerInputValue = '';
         this.error = '';
+        this._focusOnInput();
       });
     } catch (e) {
       runInAction(() => {
@@ -77,11 +79,27 @@ class State {
         } else {
           this.error = 'UnknownError';
         }
+        this._focusOnInput(true);
       });
     } finally {
       runInAction(() => {
         this.loading = false;
       });
+    }
+  };
+
+  setInputRef = ref => {
+    this._inputRef = ref;
+  };
+
+  _focusOnInput = (select = false) => {
+    if (this._inputRef) {
+      setTimeout(() => {
+        this._inputRef.focus();
+        if (select) {
+          this._inputRef.select();
+        }
+      }, 0);
     }
   };
 }
