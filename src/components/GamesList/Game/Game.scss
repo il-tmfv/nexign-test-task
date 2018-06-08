@@ -26,14 +26,14 @@
 .Game__launch-link {
   background-color: $extra-btn-color;
   border-radius: 2px;
-  color: #222;
+  color: $color-mine-shaft;
   text-decoration: none;
   @include with-border();
   padding: 8px;
   @include with-transition();
 
   &:hover {
-    background-color: #fab700;
+    background-color: $color-selective-yellow;
   }
 }
 
