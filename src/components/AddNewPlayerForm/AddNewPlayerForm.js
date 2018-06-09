@@ -44,6 +44,7 @@ class AddNewPlayerForm extends Component {
           type="text"
           name="new-player-username"
           autoFocus
+          placeholder="steamcommunity id"
         />
         <button disabled={disabledSubmit} type="submit">
           Add
